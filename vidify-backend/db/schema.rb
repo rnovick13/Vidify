@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 2019_01_19_215101) do
 
   create_table "playlists", force: :cascade do |t|
     t.string "name"
+    t.string "source"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
