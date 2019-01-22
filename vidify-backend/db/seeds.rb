@@ -14,5 +14,5 @@ vid1 = Video.create(name: "How to Make Dried Bread", source: "https://www.youtub
 vid2 = Video.create(name: "How to Master 5 Basic Cooking Skills", source: "https://www.youtube.com/watch?v=ZJy1ajvMU1k")
 # vid3 =
 
-plv1 = PlaylistVideo.create(video_id: vid1.id, playlist_id: cooking.id)
-plv1 = PlaylistVideo.create(video_id: vid2.id, playlist_id: cooking.id)
+plv1 = PlaylistVideo.create(video_id: 1, playlist_id: 1)
+plv1 = PlaylistVideo.create(video_id: 2, playlist_id: 1)
