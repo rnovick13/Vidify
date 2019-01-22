@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
-  
-  get 'playlist_videos/index'
-  get 'videos/index'
-  get 'videos/show'
-  get 'playlists/index'
-  get 'playlists/show'
+  # get "homes/index"
+  # root 'homes#index'
+
+  # get 'playlist_videos/index'
+  resources :videos, only: [:index, :show]
+  resources :playlists, only: [:index, :show]
 end
