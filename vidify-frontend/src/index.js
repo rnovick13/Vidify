@@ -6,9 +6,16 @@ document.addEventListener('DOMContentLoaded', ()=>{
 })
 
 function renderPlaylist(playlist) {
+  debugger
     let headerTag = document.querySelector('name')
+
     playlist.forEach(playlist => {renderPlaylist(playlist)})
+
     // debugger
     headerTag.innerText = `${playlist.name}`
     headerTag.classList.add('playlist')
 }
+
+//create card div that will format each playlist - pokemon teams lab
+//appendchild to make it show on the DOM
+//
