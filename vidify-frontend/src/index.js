@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', ()=>{
-  //show list of playlists
-  //
+  fetch('http://localhost:3000/playlists/')
+  .then(res => res.json())
+  .then(json => console.log(json));
 })
