@@ -1,33 +1,33 @@
 document.addEventListener('DOMContentLoaded', ()=>{
   fetch('http://localhost:3000/playlists/')
   .then(res => res.json())
-  .then(playlists => {
-    renderPlaylists(playlists)
+  .then(data => {
+    renderPlaylists(data)
   })
 })
 
-function renderPlaylist(name) {
+function renderPlaylists(data) {
+  let headerTag = document.querySelector('#name')
+  let imgTag = document.querySelector('img')
+  // playlist.forEach(playlist => {renderPlaylist(playlist)})
+  data.forEach(data => {
+    renderPlaylist(data)
+  })
+  // debugger
+
+}
+
+function renderPlaylist(data) {
 
   let ul = document.querySelector("all")
-  let li = document.createElemnt("li")
-  li.innerText = `${name}`
+  let li = document.createElement("li")
+  li.innerText = `${data}`
   ul.appendChild(li)
+  headerTag.innerText = `${data.name}`
+  headerTag.classList.add('playlist')
+  imgTag.src=`${data.source}`
 }
 
-function renderPlaylists(playlists) {
-    let headerTag = document.querySelector('#name')
-    let imgTag = document.querySelector('img')
-    // playlist.forEach(playlist => {renderPlaylist(playlist)})
-    playlists.forEach(array => {
-      headerTag.innerText = `${array.name}`
-      headerTag.classList.add('playlist')
-      // debugger
-      imgTag.src=`${array.source}`
-
-
-    })
-
-}
 //need to add forEach watch pokemon
 
 //create card div that will format each playlist - pokemon teams lab
