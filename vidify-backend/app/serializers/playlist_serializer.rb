@@ -1,4 +1,4 @@
 class PlaylistSerializer < ActiveModel::Serializer
-  attributes :id, :name
+  attributes :id, :name, :source
   has_many :videos
 end

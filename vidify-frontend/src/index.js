@@ -6,25 +6,51 @@ document.addEventListener('DOMContentLoaded', ()=>{
   })
 })
 
-<<<<<<< HEAD
+function renderPlaylist(name) {
+
+  let ul = document.querySelector("all")
+  let li = document.createElemnt("li")
+  li.innerText = `${name}`
+  ul.appendChild(li)
+}
+
 function renderPlaylists(playlists) {
     let headerTag = document.querySelector('#name')
+    let imgTag = document.querySelector('img')
     // playlist.forEach(playlist => {renderPlaylist(playlist)})
-    headerTag.innerText = `${playlists.name}`
-    debugger
-=======
-function renderPlaylist(playlist) {
-  debugger
-    let headerTag = document.querySelector('name')
+    playlists.forEach(array => {
+      headerTag.innerText = `${array.name}`
+      headerTag.classList.add('playlist')
+      // debugger
+      imgTag.src=`${array.source}`
 
-    playlist.forEach(playlist => {renderPlaylist(playlist)})
 
-    // debugger
-    headerTag.innerText = `${playlist.name}`
->>>>>>> b645300a68a7d2ee501fe49f73ffb452016608cb
-    headerTag.classList.add('playlist')
+    })
+
 }
+//need to add forEach watch pokemon
 
 //create card div that will format each playlist - pokemon teams lab
 //appendchild to make it show on the DOM
 //
+
+//
+// function renderComment(comment){
+//   let li = document.createElement("li")
+//   li.innerHTML = `${comment.content}`
+//   ul.appendChild(li)
+//
+// }
+// function renderCommentList(data){
+//   let form = document.querySelector("#comment_form")
+//   let ul = document.querySelector("#comments")
+//   data.comments.forEach(comment => {
+//     renderComment(comment)
+//   })
+//
+//   function getCommentData(data, content){
+//   return{
+//     'image_id': data.id,
+//     'content': content
+//   }
+// }
