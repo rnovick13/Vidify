@@ -5,34 +5,37 @@ document.addEventListener('DOMContentLoaded', ()=>{
     renderPlaylists(playlists)
   })
 })
+  // debugger
 
-function renderPlaylist(name) {
-
-  let ul = document.querySelector("all")
-  let li = document.createElemnt("li")
-  li.innerText = `${name}`
-  ul.appendChild(li)
-}
 
 function renderPlaylists(playlists) {
-    let headerTag = document.querySelector('#name')
-    let imgTag = document.querySelector('img')
-    // playlist.forEach(playlist => {renderPlaylist(playlist)})
-    playlists.forEach(array => {
-      headerTag.innerText = `${array.name}`
-      headerTag.classList.add('playlist')
-      // debugger
-      imgTag.src=`${array.source}`
-
-
+    playlists.forEach(playlist => {
+      playlistInfo(playlist)
     })
-
 }
-//need to add forEach watch pokemon
+
+function playlistInfo(playlist) {
+  let playlistDiv = document.querySelector('.playlist')
+  const headerTag = document.createElement('h2')
+  const imgTag = document.createElement('img')
+
+  headerTag.innerText = `${playlist.name}`
+  headerTag.classList.add('card')
+  imgTag.src=`${playlist.source}`
+  imgTag.classList.add('card')
+
+  playlistDiv.appendChild(headerTag)
+  playlistDiv.appendChild(imgTag)
+}
+
+
+
+//need to turn playlist names/images into links that reload with all the videos in that pl
+
+//CSS to make all the pl images the same size
 
 //create card div that will format each playlist - pokemon teams lab
-//appendchild to make it show on the DOM
-//
+
 
 //
 // function renderComment(comment){
