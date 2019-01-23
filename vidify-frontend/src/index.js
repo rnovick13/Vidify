@@ -6,33 +6,65 @@ document.addEventListener('DOMContentLoaded', ()=>{
   })
 })
 
-function renderPlaylists(data) {
-  let headerTag = document.querySelector('#name')
-  let imgTag = document.querySelector('img')
-  // playlist.forEach(playlist => {renderPlaylist(playlist)})
-  data.forEach(data => {
-    renderPlaylist(data)
-  })
+
+function renderPlaylists(playlists) {
+    playlists.forEach(playlist => {
+      playlistInfo(playlist)
+    })
+}
+
+function playlistInfo(playlist) {
+  let playlistDiv = document.querySelector('.playlist')
+
+  const headerTag = document.createElement('h2')
+  headerTag.innerText = `${playlist.name}`
+  headerTag.classList.add('card')
+
+  const imgTag = document.createElement('img')
+  imgTag.src=`${playlist.source}`
+  imgTag.classList.add('card')
+
+  const viewButton = document.createElement('button')
+  viewButton.innerText = "View Playlist"
+  viewButton.id = `view-${playlist.id}`
+  viewButton.addEventListener('click', viewPlaylist)
+
+  playlistDiv.appendChild(headerTag)
+  playlistDiv.appendChild(imgTag)
+  playlistDiv.appendChild(viewButton)
+}
+
+function viewPlaylist(e){
+  let id = e.target.id.split('-')[1]
+  document.open()
+  renderPlaylistVideos(id)
+}
+
+//potentially just remove div class="playlist" instead of document.open()
+//we have the id
+//fetch the playlist videos show page
+//render the data on the web page
+
+
+
+function renderPlaylistVideos(id){
+  const playlistName = document.createElement('h1')
+  // const playlist =
   // debugger
-
+  // playlistName.innerText =
+  //playlist name as header
+  //list video names
+  //video names clickable links to actual videos
 }
 
-function renderPlaylist(data) {
 
-  let ul = document.querySelector("all")
-  let li = document.createElement("li")
-  li.innerText = `${data}`
-  ul.appendChild(li)
-  headerTag.innerText = `${data.name}`
-  headerTag.classList.add('playlist')
-  imgTag.src=`${data.source}`
-}
 
-//need to add forEach watch pokemon
+//need to turn playlist names/images into links that reload with all the videos in that pl
+
+//CSS to make all the pl images the same size
 
 //create card div that will format each playlist - pokemon teams lab
-//appendchild to make it show on the DOM
-//
+
 
 //
 // function renderComment(comment){
