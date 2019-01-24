@@ -19,9 +19,21 @@
   <body background="images/vidify_logo.png">
     <div class="main">
       <br>
-      <button type="button" name="create">Create New Playlist</button>
       <button type="button" name="search">Search</button>
+      <button type="button" name="create" id="create">Create New Playlist</button>
     </div>
+
+    <div class="container" style="display: none">
+      <form class="add-playlist-form" id="new-playlist-form" action="index.html" method="post">
+        <h3>Create New Playlist</h3>
+        <input type="text" name="name" value="" placeholder="Enter Playlist Name" class="input-text" id="new-playlist-name">
+        <br>
+        <input type="text" name="image" value="" placeholder="Playlist Cover Image" class="input-text" id="new-playlist-image">
+        <br>
+        <input type="submit" name="submit" value="Create New Playlist" class="submit">
+      </form>
+    </div>
+
     <div class="playlist">
       <br>
       <br>
