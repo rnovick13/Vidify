@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
       playlistFormDiv().style.display = 'none'
     }
   })
-  // replaceDOM()
 })
 
 function resetForm() {
@@ -34,28 +33,24 @@ function renderPlaylists(playlists) {
 }
 
 function playlistInfo(playlist) {
-  let playlistDiv = document.querySelector('.playlist') //grandparent
+  let playlistDiv = document.querySelector('.playlist')
 
-  // playlistDiv.classList.add('card')
-  //make mommy or daddy aka div
+
   let cardDiv = document.createElement('div')
   cardDiv.classList.add('card')
 
   const headerTag = document.createElement('h2')
   headerTag.innerText = `${playlist.name}`
   headerTag.classList.add('playlist')
-  // headerTag.classList.add('card')
 
   const imgTag = document.createElement('img')
   imgTag.src=`${playlist.source}`
   imgTag.classList.add('playlist')
-  // imgTag.classList.add('card')
 
   const viewButton = document.createElement('button')
   viewButton.innerText = "View Playlist"
   viewButton.id = `view-${playlist.id}`
   viewButton.classList.add('playlist')
-  // viewButton.classList.add('card')
   viewButton.addEventListener('click', viewPlaylist)
 
   cardDiv.appendChild(headerTag)
@@ -63,26 +58,15 @@ function playlistInfo(playlist) {
   cardDiv.appendChild(viewButton)
   playlistDiv.appendChild(cardDiv)
 }
-//potentially just remove div class="playlist" instead of document.open()
-//we have the id
-//fetch the playlist videos show page
-//render the data on the web page
-
-function replaceDOM() {
-  let body = document.querySelector(".site-body")
-  body.innerHTML = ""
-
-  // let home = document.querySelector(".playlist")
-  let newPage = document.querySelector(".video-list")
-  body.appendChild(newPage)
-
-
-}
 
 function viewPlaylist(e){
   let id = e.target.id.split('-')[1]
-  // document.open()
-  //remove div class "playlist"
+  let div = document.querySelector('.playlist')
+  let videoDiv = document.createElement('div')
+  videoDiv.classList.add('video-list')
+  div.innerHTML = ""
+  div.appendChild(videoDiv)
+
   getVideos(id)
   // renderPlaylistVideos(id)
 }
@@ -96,32 +80,32 @@ function getVideos(id) {
 }
 
 function renderPlaylistVideos(data){
+  // debugger;
   let videoPage = document.querySelector('.video-list')
+  let videoCard = document.createElement('div')
+  videoPage.appendChild(videoCard)
 
   const playlistName = document.createElement('h2')
   playlistName.innerText = data.name
-  // debugger
-  videoPage.appendChild(playlistName)
-  //playlist name as header
+  videoCard.appendChild(playlistName)
 
   data.videos.forEach(video => {
     const videoList = document.createElement('ul')
     const videos = document.createElement('li')
     videos.innerText = `${video.name}`
     videoList.appendChild(videos)
+    videoCard.appendChild(videoList)
 
     const watchButton = document.createElement('button')
     watchButton.innerText = "Watch Video"
-    // watchButton.addEventListener('click', linkToVideo(video.source))
-    // console.log("Hits")
+    videoCard.appendChild(watchButton)
+    watchButton.addEventListener(
+      'click', ()=>{linkToVideo(video.source)}
+    )
     })
-
-    function linkToVideo(videoSource) {
-
-    }
-
-  //list video names
-  //video names clickable links to actual videos
+}
+function linkToVideo(videoSource) {
+  window.location=`${videoSource}`
 }
 
 function create(){
