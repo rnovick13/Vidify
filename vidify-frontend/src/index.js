@@ -12,6 +12,14 @@ document.addEventListener('DOMContentLoaded', ()=>{
       playlistFormDiv().style.display = 'none'
     }
   })
+  addVideo().addEventListener('click', () => {
+    if (videoFormDiv().style.display == 'none') {
+      videoFormDiv().style.display = 'block'
+      getNewVideoForm().addEventListener('submit', createVideo)
+    } else {
+      videoFormDiv().style.display = 'none'
+    }
+  })
 })
 
 function resetForm() {
@@ -35,42 +43,81 @@ function renderPlaylists(playlists) {
 function playlistInfo(playlist) {
   let playlistDiv = document.querySelector('.playlist')
 
+
+  let cardDiv = document.createElement('div')
+  cardDiv.classList.add('card')
+
   const headerTag = document.createElement('h2')
   headerTag.innerText = `${playlist.name}`
-  headerTag.classList.add('card')
+  headerTag.classList.add('playlist')
 
   const imgTag = document.createElement('img')
   imgTag.src=`${playlist.source}`
-  imgTag.classList.add('card')
+  imgTag.classList.add('playlist')
 
   const viewButton = document.createElement('button')
   viewButton.innerText = "View Playlist"
   viewButton.id = `view-${playlist.id}`
+  viewButton.classList.add('playlist')
   viewButton.addEventListener('click', viewPlaylist)
 
-  playlistDiv.appendChild(headerTag)
-  playlistDiv.appendChild(imgTag)
-  playlistDiv.appendChild(viewButton)
+  cardDiv.appendChild(headerTag)
+  cardDiv.appendChild(imgTag)
+  cardDiv.appendChild(viewButton)
+  playlistDiv.appendChild(cardDiv)
 }
 
 function viewPlaylist(e){
   let id = e.target.id.split('-')[1]
-  // document.open()
-  // renderPlaylistVideos(id)
+  let div = document.querySelector('.playlist')
+  let videoDiv = document.createElement('div')
+  videoDiv.classList.add('video-list')
+  div.innerHTML = ""
+  div.appendChild(videoDiv)
+
+  getVideos(id)
 }
 
-//potentially just remove div class="playlist" instead of document.open()
-//we have the id
-//fetch the playlist videos show page
-//render the data on the web page
+function getVideos(id) {
+  fetch(`http://localhost:3000/playlists/${id}`)
+  .then(res => res.json())
+  .then(data => {
+    renderPlaylistVideos(data)
+  })
+}
 
+function renderPlaylistVideos(data){
+  let videoPage = document.querySelector('.video-list')
+  let videoCard = document.createElement('div')
+  videoPage.appendChild(videoCard)
 
+  const playlistName = document.createElement('h2')
+  playlistName.innerText = data.name
+  videoCard.appendChild(playlistName)
 
-function renderPlaylistVideos(id){
-  const playlistName = document.createElement('h1')
-  //playlist name as header
-  //list video names
-  //video names clickable links to actual videos
+  const addVideoButton = document.createElement('button')
+  addVideoButton.innerText = "Add Video"
+  addVideoButton.setAttribute("id", "add")
+  videoCard.appendChild(addVideoButton)
+  addVideoButton.addEventListener('click', () => {addVideo()})
+
+  data.videos.forEach(video => {
+    const videoList = document.createElement('ul')
+    const videos = document.createElement('li')
+    videos.innerText = `${video.name}`
+    videoList.appendChild(videos)
+    videoCard.appendChild(videoList)
+
+    const watchButton = document.createElement('button')
+    watchButton.innerText = "Watch Video"
+    videoCard.appendChild(watchButton)
+    watchButton.addEventListener(
+      'click', ()=>{linkToVideo(video.source)}
+    )
+    })
+}
+function linkToVideo(videoSource) {
+  window.location=`${videoSource}`
 }
 
 function create(){
@@ -112,11 +159,49 @@ function getNewPlaylistSource() {
   return document.getElementById("new-playlist-image")
 }
 
+function videoFormDiv() {
+  return document.querySelector('.add-video-form')
+}
 
+function getNewVideoForm() {
+  return document.getElementById('new-playlist-video-form')
+}
 
+function addVideo(){
+  return document.getElementById("add")
+}
 
-//need to turn playlist names/images into links that reload with all the videos in that pl
+function createNewVideo(newVideoInfo) {
+  const data = newVideoInfo
+  return fetch('http://localhost:3000/playlists/:id', {
+    method: "POST",
+    headers:
+    {
+      "Content-Type": "application/json",
+      Accept: "application/json"
+    },
+    body: JSON.stringify(data)
+  })
+}
 
-//CSS to make all the pl images the same size
+function createVideo(e){
+  e.preventDefault()
+  const newVideo = {
+    name: getNewVideoName().value,
+    source: getNewVideoSource().value
+  }
 
-//create card div that will format each playlist - pokemon teams lab
+  createNewVideo(newVideo)
+  .then(newVideo => newVideo.json())
+  .then(newVideoObj => {
+    videoInfo(newVideoObj)
+  })
+}
+
+function getNewVideoName() {
+  return document.getElementById("new-video-name")
+}
+
+function getNewVideoSource() {
+  return document.getElementById("new-video-source")
+}

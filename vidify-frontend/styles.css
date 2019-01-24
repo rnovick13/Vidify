@@ -1,8 +1,19 @@
-div.card {
-  background-color: #eeeeee;
-  height: 250px;
-  width: 300px;
-  box-shadow: 10px 10px grey;
+.card {
+  background-color: rgb(60, 31, 87);
+  /* #eeeeee; */
+  height: 350px;
+  width: 400px;
+  box-shadow: 10px 10px purple;
   padding: 10px;
   border-radius: 10px;
+}
+
+img {
+  height: 250px;
+  width: 300px;
+  object-fit: cover;
+}
+
+h2 {
+  color: orange;
 }

@@ -11,13 +11,14 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <meta charset="utf-8">
     <title>Vidify</title>
-    <!-- <h1>Vidify</h1> -->
     <link rel="stylesheet" href="styles.css">
     <script src="src/index.js"></script>
 
   </head>
-  <body background="images/vidify_logo.png">
+  <body background="images/vidify_logo.png" class="site-body">
     <div class="main">
+      <br>
+      <br>
       <br>
       <button type="button" name="search">Search</button>
       <button type="button" name="create" id="create">Create New Playlist</button>
@@ -34,14 +35,20 @@
       </form>
     </div>
 
+    <div class="add-video" style="display: none">
+      <form class="add-video-form" id="new-playlist-video-form" action="index.html" method="post">
+        <h3>Add Video</h3>
+        <input type="text" name="name" value="" placeholder="Enter Video Name" class="input-text" id="new-video-name">
+        <br>
+        <input type="text" name="source" value="" placeholder="Video URL" class="input-text" id="new-video-source">
+        <br>
+        <input type="submit" name="submit" value="Add New Video" class="submit">
+      </form>
+    </div>
+
     <div class="playlist">
-      <br>
-      <br>
-        <h1>Playlists</h1>
-      <ul class="all">
-        <h2 id="name"></h2>
-        <img src="" id="image">
-      </ul>
+      <h1>Playlists</h1>
+
     </div>
   </body>
 </html>
