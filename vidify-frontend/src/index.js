@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', ()=>{
   fetch('http://localhost:3000/playlists/')
   .then(res => res.json())
-  .then(playlists => {
-    renderPlaylists(playlists)
+  .then(data => {
+    renderPlaylists(data)
   })
   create().addEventListener('click', () => {
     if (playlistFormDiv().style.display == 'none') {
