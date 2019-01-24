@@ -4,8 +4,23 @@ document.addEventListener('DOMContentLoaded', ()=>{
   .then(data => {
     renderPlaylists(data)
   })
+  create().addEventListener('click', () => {
+    if (playlistFormDiv().style.display == 'none') {
+      playlistFormDiv().style.display = 'block'
+      getNewPlaylistForm().addEventListener('submit', createPlaylist)
+    } else {
+      playlistFormDiv().style.display = 'none'
+    }
+  })
 })
 
+function getNewPlaylistForm() {
+  return document.getElementById('new-playlist-form')
+}
+
+function playlistFormDiv() {
+  return document.querySelector('.container')
+}
 
 function renderPlaylists(playlists) {
     playlists.forEach(playlist => {
@@ -37,7 +52,7 @@ function playlistInfo(playlist) {
 function viewPlaylist(e){
   let id = e.target.id.split('-')[1]
   document.open()
-  renderPlaylistVideos(id)
+  // renderPlaylistVideos(id)
 }
 
 //potentially just remove div class="playlist" instead of document.open()
@@ -49,12 +64,56 @@ function viewPlaylist(e){
 
 function renderPlaylistVideos(id){
   const playlistName = document.createElement('h1')
-  // const playlist =
-  // debugger
-  // playlistName.innerText =
   //playlist name as header
   //list video names
   //video names clickable links to actual videos
+}
+
+function create(){
+  return document.getElementById("create")
+}
+
+function createNewPlaylist(newPlaylistInfo) {
+  const data = newPlaylistInfo
+  return fetch('http://localhost:3000/playlists', {
+    method: "POST",
+    headers:
+    {
+      "Content-Type": "application/json",
+      Accept: "application/json"
+    },
+    body: JSON.stringify(data)
+  })
+}
+
+function createPlaylist(e){
+  e.preventDefault()
+  const newPlaylist = {
+    name: getNewPlaylistName().value,
+    source: getNewPlaylistSource().value
+  }
+
+  createNewPlaylist(newPlaylist)
+  .then(r => r.json)
+  .then(newPlaylistObj => {
+    renderPlaylist(newPlaylistObj)
+  })
+  //called when button is clicked
+  //modal pop up with form
+  console.log("You booped the button!")
+}
+
+function getNewPlaylistName() {
+  return document.getElementById("new-playlist-name")
+}
+
+function getNewPlaylistSource() {
+  return document.getElementById("new-playlist-image")
+}
+
+
+function renderPlaylist() {
+  console.log("Boop that button!")
 }
 
 
@@ -64,25 +123,3 @@ function renderPlaylistVideos(id){
 //CSS to make all the pl images the same size
 
 //create card div that will format each playlist - pokemon teams lab
-
-
-//
-// function renderComment(comment){
-//   let li = document.createElement("li")
-//   li.innerHTML = `${comment.content}`
-//   ul.appendChild(li)
-//
-// }
-// function renderCommentList(data){
-//   let form = document.querySelector("#comment_form")
-//   let ul = document.querySelector("#comments")
-//   data.comments.forEach(comment => {
-//     renderComment(comment)
-//   })
-//
-//   function getCommentData(data, content){
-//   return{
-//     'image_id': data.id,
-//     'content': content
-//   }
-// }
