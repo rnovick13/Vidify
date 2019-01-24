@@ -12,6 +12,14 @@ document.addEventListener('DOMContentLoaded', ()=>{
       playlistFormDiv().style.display = 'none'
     }
   })
+  addVideo().addEventListener('click', () => {
+    if (videoFormDiv().style.display == 'none') {
+      videoFormDiv().style.display = 'block'
+      getNewVideoForm().addEventListener('submit', createVideo)
+    } else {
+      videoFormDiv().style.display = 'none'
+    }
+  })
 })
 
 function resetForm() {
@@ -68,7 +76,6 @@ function viewPlaylist(e){
   div.appendChild(videoDiv)
 
   getVideos(id)
-  // renderPlaylistVideos(id)
 }
 
 function getVideos(id) {
@@ -80,7 +87,6 @@ function getVideos(id) {
 }
 
 function renderPlaylistVideos(data){
-  // debugger;
   let videoPage = document.querySelector('.video-list')
   let videoCard = document.createElement('div')
   videoPage.appendChild(videoCard)
@@ -88,6 +94,12 @@ function renderPlaylistVideos(data){
   const playlistName = document.createElement('h2')
   playlistName.innerText = data.name
   videoCard.appendChild(playlistName)
+
+  const addVideoButton = document.createElement('button')
+  addVideoButton.innerText = "Add Video"
+  addVideoButton.setAttribute("id", "add")
+  videoCard.appendChild(addVideoButton)
+  addVideoButton.addEventListener('click', () => {addVideo()})
 
   data.videos.forEach(video => {
     const videoList = document.createElement('ul')
@@ -147,11 +159,49 @@ function getNewPlaylistSource() {
   return document.getElementById("new-playlist-image")
 }
 
+function videoFormDiv() {
+  return document.querySelector('.add-video-form')
+}
 
+function getNewVideoForm() {
+  return document.getElementById('new-playlist-video-form')
+}
 
+function addVideo(){
+  return document.getElementById("add")
+}
 
-//need to turn playlist names/images into links that reload with all the videos in that pl
+function createNewVideo(newVideoInfo) {
+  const data = newVideoInfo
+  return fetch('http://localhost:3000/playlists/:id', {
+    method: "POST",
+    headers:
+    {
+      "Content-Type": "application/json",
+      Accept: "application/json"
+    },
+    body: JSON.stringify(data)
+  })
+}
 
-//CSS to make all the pl images the same size
+function createVideo(e){
+  e.preventDefault()
+  const newVideo = {
+    name: getNewVideoName().value,
+    source: getNewVideoSource().value
+  }
 
-//create card div that will format each playlist - pokemon teams lab
+  createNewVideo(newVideo)
+  .then(newVideo => newVideo.json())
+  .then(newVideoObj => {
+    videoInfo(newVideoObj)
+  })
+}
+
+function getNewVideoName() {
+  return document.getElementById("new-video-name")
+}
+
+function getNewVideoSource() {
+  return document.getElementById("new-video-source")
+}
