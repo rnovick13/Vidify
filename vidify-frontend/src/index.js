@@ -14,6 +14,10 @@ document.addEventListener('DOMContentLoaded', ()=>{
   })
 })
 
+function resetForm() {
+  document.getElementById('new-playlist-form').reset()
+}
+
 function getNewPlaylistForm() {
   return document.getElementById('new-playlist-form')
 }
@@ -51,7 +55,7 @@ function playlistInfo(playlist) {
 
 function viewPlaylist(e){
   let id = e.target.id.split('-')[1]
-  document.open()
+  // document.open()
   // renderPlaylistVideos(id)
 }
 
@@ -94,13 +98,10 @@ function createPlaylist(e){
   }
 
   createNewPlaylist(newPlaylist)
-  .then(r => r.json)
+  .then(newPlaylist => newPlaylist.json())
   .then(newPlaylistObj => {
-    renderPlaylist(newPlaylistObj)
+    playlistInfo(newPlaylistObj)
   })
-  //called when button is clicked
-  //modal pop up with form
-  console.log("You booped the button!")
 }
 
 function getNewPlaylistName() {
@@ -111,10 +112,6 @@ function getNewPlaylistSource() {
   return document.getElementById("new-playlist-image")
 }
 
-
-function renderPlaylist() {
-  console.log("Boop that button!")
-}
 
 
 
