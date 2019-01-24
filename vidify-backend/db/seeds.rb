@@ -12,7 +12,8 @@ music = Playlist.create(name: "Best Songs Ever", source: "https://image.shutters
 
 vid1 = Video.create(name: "How to Make Dried Bread", source: "https://www.youtube.com/watch?v=Qtgsqxmz-ew&list=PLbS0HkS8Xsorrdr3pPk4lP80tUAzfyxP1&index=3")
 vid2 = Video.create(name: "How to Master 5 Basic Cooking Skills", source: "https://www.youtube.com/watch?v=ZJy1ajvMU1k")
-# vid3 =
+vid3 = Video.create(name: "Great Song From a Great Movie", source: "https://www.youtube.com/watch?v=_-aMV2xXdps")
 
 plv1 = PlaylistVideo.create(video_id: 1, playlist_id: 1)
-plv1 = PlaylistVideo.create(video_id: 2, playlist_id: 1)
+plv2 = PlaylistVideo.create(video_id: 2, playlist_id: 1)
+plv3 = PlaylistVideo.create(video_id: 3, playlist_id: 4)
