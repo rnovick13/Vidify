@@ -93,7 +93,6 @@ function renderPlaylistVideos(data){
   addVideoButton.addEventListener('click', () => {addVideo()})
 
   addVideoButton.addEventListener('click', () => {
-    // debugger
     if (videoFormDiv().style.display == 'none') {
       videoFormDiv().style.display = 'block'
       getNewVideoForm().addEventListener('submit', createVideo)
@@ -103,21 +102,28 @@ function renderPlaylistVideos(data){
   })
   videoCard.appendChild(addVideoButton)
 
-  data.videos.forEach(video => {
-    const videoList = document.createElement('ul')
-    const videos = document.createElement('li')
-    videos.innerText = `${video.name}`
-    videoList.appendChild(videos)
-    videoCard.appendChild(videoList)
-
-    const watchButton = document.createElement('button')
-    watchButton.innerText = "Watch Video"
-    videoCard.appendChild(watchButton)
-    watchButton.addEventListener(
-      'click', ()=>{linkToVideo(video.source)}
-    )
-    })
+  data.videos.forEach(video => {videoInfo(video)})
 }
+
+function videoInfo(video) {
+
+  let pageDiv = document.querySelector('.video-list')
+  let videoCardDiv = document.createElement('div')
+  videoCardDiv.classList.add('card')
+  pageDiv.appendChild(videoCardDiv)
+
+  const header = document.createElement('h2')
+  header.innerText = `${video.name}`
+  videoCardDiv.appendChild(header)
+
+  const watchButton = document.createElement('button')
+  watchButton.innerText = "Watch Video"
+  videoCardDiv.appendChild(watchButton)
+  watchButton.addEventListener(
+    'click', ()=>{linkToVideo(video.source)}
+  )
+}
+
 function linkToVideo(videoSource) {
   window.location=`${videoSource}`
 }
@@ -180,7 +186,7 @@ function createNewVideo(newVideoInfo) {
     headers:
     {
       "Content-Type": "application/json",
-      Accept: "application/json"
+      "Accept": "application/json"
     },
     body: JSON.stringify(data)
   })
