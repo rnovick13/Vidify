@@ -12,14 +12,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
       playlistFormDiv().style.display = 'none'
     }
   })
-  addVideo().addEventListener('click', () => {
-    if (videoFormDiv().style.display == 'none') {
-      videoFormDiv().style.display = 'block'
-      getNewVideoForm().addEventListener('submit', createVideo)
-    } else {
-      videoFormDiv().style.display = 'none'
-    }
-  })
 })
 
 function resetForm() {
@@ -98,8 +90,18 @@ function renderPlaylistVideos(data){
   const addVideoButton = document.createElement('button')
   addVideoButton.innerText = "Add Video"
   addVideoButton.setAttribute("id", "add")
-  videoCard.appendChild(addVideoButton)
   addVideoButton.addEventListener('click', () => {addVideo()})
+
+  addVideoButton.addEventListener('click', () => {
+    // debugger
+    if (videoFormDiv().style.display == 'none') {
+      videoFormDiv().style.display = 'block'
+      getNewVideoForm().addEventListener('submit', createVideo)
+    } else {
+      videoFormDiv().style.display = 'none'
+    }
+  })
+  videoCard.appendChild(addVideoButton)
 
   data.videos.forEach(video => {
     const videoList = document.createElement('ul')
@@ -160,7 +162,7 @@ function getNewPlaylistSource() {
 }
 
 function videoFormDiv() {
-  return document.querySelector('.add-video-form')
+  return document.querySelector('.add-video')
 }
 
 function getNewVideoForm() {
@@ -168,6 +170,7 @@ function getNewVideoForm() {
 }
 
 function addVideo(){
+  // debugger
   return document.getElementById("add")
 }
 
@@ -205,3 +208,12 @@ function getNewVideoName() {
 function getNewVideoSource() {
   return document.getElementById("new-video-source")
 }
+
+// addVideo().addEventListener('click', () => {
+//   if (videoFormDiv().style.display == 'none') {
+//     videoFormDiv().style.display = 'block'
+//     getNewVideoForm().addEventListener('submit', createVideo)
+//   } else {
+//     videoFormDiv().style.display = 'none'
+//   }
+// })
