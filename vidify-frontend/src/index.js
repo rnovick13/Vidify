@@ -84,6 +84,10 @@ function renderPlaylistVideos(data){
   videoPage.appendChild(videoCard)
 
   const playlistName = document.createElement('h2')
+  playlistName.classList.add('playlist-title')
+  playlistName.dataset.id = data.id
+  // playlistName.dataset.example = "hello"
+  // debugger
   playlistName.innerText = data.name
   videoCard.appendChild(playlistName)
 
@@ -181,6 +185,9 @@ function addVideo(){
 
 function createNewVideo(newVideoInfo) {
   const data = newVideoInfo
+  const playlistId = document.querySelector('.playlist-title').dataset.id
+  data.playlist = playlistId
+  // debugger
   return fetch('http://localhost:3000/videos', {
     method: "POST",
     headers:
@@ -191,6 +198,7 @@ function createNewVideo(newVideoInfo) {
     body: JSON.stringify(data)
   })
 }
+
 
 function createVideo(e){
   e.preventDefault()

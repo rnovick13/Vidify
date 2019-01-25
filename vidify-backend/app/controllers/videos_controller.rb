@@ -11,6 +11,9 @@ class VideosController < ApplicationController
 
   def create
     @video = Video.create(strong_params)
+    PlaylistVideo.create(video_id: @video.id, playlist_id: params[:playlist])
+    # params[:playlist]
+    # byebug
     render json: @video
   end
 
