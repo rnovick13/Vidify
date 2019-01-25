@@ -8,4 +8,20 @@ class VideosController < ApplicationController
     @video = Video.find(params[:id])
     render json: @video
   end
-end
+
+  def create
+    @video = Video.create(strong_params)
+    render json: @video
+  end
+
+
+    private
+
+    def strong_params
+      params.require(:video).permit(
+        :name,
+        :source
+      )
+    end
+
+  end

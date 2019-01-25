@@ -201,6 +201,8 @@ function createVideo(e){
   })
 }
 
+//need to create function videoInfo
+
 function getNewVideoName() {
   return document.getElementById("new-video-name")
 }
