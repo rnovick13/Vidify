@@ -14,9 +14,10 @@ img {
   object-fit: cover;
 }
 
-.site-body {
+/* .site-body {
+  background-size: auto;
   background-size: contain;
-}
+} */
 h2 {
   color: orange;
 }

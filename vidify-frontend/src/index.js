@@ -170,7 +170,6 @@ function getNewVideoForm() {
 }
 
 function addVideo(){
-  // debugger
   return document.getElementById("add")
 }
 
@@ -200,8 +199,6 @@ function createVideo(e){
     videoInfo(newVideoObj)
   })
 }
-
-//need to create function videoInfo
 
 function getNewVideoName() {
   return document.getElementById("new-video-name")
