@@ -176,7 +176,7 @@ function addVideo(){
 
 function createNewVideo(newVideoInfo) {
   const data = newVideoInfo
-  return fetch('http://localhost:3000/playlists/:id', {
+  return fetch('http://localhost:3000/videos', {
     method: "POST",
     headers:
     {
@@ -208,12 +208,3 @@ function getNewVideoName() {
 function getNewVideoSource() {
   return document.getElementById("new-video-source")
 }
-
-// addVideo().addEventListener('click', () => {
-//   if (videoFormDiv().style.display == 'none') {
-//     videoFormDiv().style.display = 'block'
-//     getNewVideoForm().addEventListener('submit', createVideo)
-//   } else {
-//     videoFormDiv().style.display = 'none'
-//   }
-// })
