@@ -10,7 +10,7 @@
 }
 
 .main {
-  text-align: center;
+  margin-left: 150px;
 }
 img {
   height: 250px;
@@ -30,7 +30,7 @@ body {
 
 
 div {
-
+  margin-left: 25px;
   color: black;
 }
 h2 {
@@ -39,4 +39,13 @@ h2 {
 
 h1 {
   color: orange;
+  margin-left: 150px;
+}
+
+h3 {
+  color: orange;
+}
+
+form {
+  margin-left: 120px;
 }
