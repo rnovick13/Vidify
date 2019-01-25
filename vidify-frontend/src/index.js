@@ -176,7 +176,7 @@ function addVideo(){
 
 function createNewVideo(newVideoInfo) {
   const data = newVideoInfo
-  return fetch('http://localhost:3000/playlists/:id', {
+  return fetch('http://localhost:3000/videos', {
     method: "POST",
     headers:
     {
@@ -200,6 +200,8 @@ function createVideo(e){
     videoInfo(newVideoObj)
   })
 }
+
+//need to create function videoInfo
 
 function getNewVideoName() {
   return document.getElementById("new-video-name")
