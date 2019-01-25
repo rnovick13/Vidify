@@ -18,7 +18,6 @@ img {
   object-fit: cover;
 }
 
-<<<<<<< HEAD
 body {
 
   background-image: url("images/vidify_logo.png");
@@ -34,12 +33,10 @@ div {
 
   color: black;
 }
-=======
-/* .site-body {
-  /* background-repeat: no-repeat; */
-  /* background-size: contain;
-} */
->>>>>>> b4723544afc44a8ab804081cfa2974dd127b222d
 h2 {
+  color: orange;
+}
+
+h1 {
   color: orange;
 }
